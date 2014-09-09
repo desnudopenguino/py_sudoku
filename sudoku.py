@@ -86,12 +86,15 @@ def new_board():
 	for index in range(9):
 		board.append([])
 
-	row_count = 0
-	while row_count < 9:
-		new_number = new_generate_number(excludes)
-		board[0].append(new_number)
-		excludes.append(new_number)
-		row_count += 1
+	column_count = 0
+	for column_index in range(9):
+		excludes = []
+		row_count = 0
+		while row_count < 9:
+			new_number = new_generate_number(excludes)
+			board[column_index].append(new_number)
+			excludes.append(new_number)
+			row_count += 1
 
 	return board
 
