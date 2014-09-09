@@ -15,11 +15,13 @@ def new_board(segment_size):
 			board[row_index].append(new_number)
 	return board
 
-#checks the validity inside the row
-def check_row(board):
-	for row in board:
-		for item in row:
-			print item
+#makes sure that unique numbers are in both rows and cols
+def check_columns(board):
+	for row in range(len(board)):
+		for temp_row in range(len(board)):
+			if temp_row != row:
+				print str(temp_row) + " " + str(row)	
+		
 
 def generate_number(row_size, used):
 	new_number = random.randint(1,row_size)
@@ -33,4 +35,6 @@ def print_board(board):
 	for row in board:
 		print row
 
-print_board(new_board(3))
+my_board = new_board(3)
+print_board(my_board)
+check_columns(my_board)
