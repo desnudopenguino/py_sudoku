@@ -8,14 +8,25 @@ def new_board(segment_size):
 	# reset excludes and column count for each row
 	for row_index in range(row_size):
 		board.append([])
+		used = []
 		for column_count in range(column_size):
-			new_number = generate_number(row_size)
+			new_number = generate_number(row_size, used)
+			used.append(new_number)
 			board[row_index].append(new_number)
 	return board
 
-def generate_number(row_size):
-	return random.randint(1,row_size)
+#checks the validity inside the row
+def check_row(board):
+	for row in board:
+		for item in row:
+			print item
+
+def generate_number(row_size, used):
+	new_number = random.randint(1,row_size)
+	while new_number in used:
+		new_number = random.randint(1,row_size)
 			
+	return new_number
 def print_board(board):
 	print "\n"
 	print "Sudoku Board!"
