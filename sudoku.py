@@ -47,9 +47,9 @@ def generate_segment(exclude):
 			counter += 1
 	return segment
 
-def generate_block():
+# builds the 3x3 grid for one of the 9 "blocks" of the board
+def generate_block(exclude):
 	block = []
-	exclude = []
 	counter = 0
 	while counter < 3:
 		new_segment = generate_segment(exclude)
@@ -58,8 +58,51 @@ def generate_block():
 		counter += 1
 	return block
 
+def generate_block_row():
+	row = []
+	for index in range(3):
+
+		new_block = generate_block()
+
+		row.append()
+	return row
+
 def print_block(block):
 	for segment in block:
 		print segment
 
-print_block(generate_block())
+def print_block_row(row):
+	for index in range(3):
+		for block in row:
+			print block[index] ,
+		print "\n"
+
+#create the board
+def new_board():
+	#board array
+	board = []
+	excludes = []
+	#make it 2d
+	for index in range(9):
+		board.append([])
+
+	row_count = 0
+	while row_count < 9:
+		new_number = new_generate_number(excludes)
+		board[0].append(new_number)
+		excludes.append(new_number)
+		row_count += 1
+
+	return board
+
+def new_generate_number(excludes):
+	new_number = random.randint(1,9)
+	while new_number in(excludes):
+		new_number = random.randint(1,9)
+	return new_number
+			
+def new_print_board(board):
+	for row in board:
+		print row
+
+new_print_board(new_board())
