@@ -79,28 +79,41 @@ def print_block_row(row):
 
 #create the board
 def new_board(segment_size):
-	row_size = segment_size ** 2
+	row_size = column_size = segment_size ** 2 # set length and width of board
 	#board array
 	board = []
 	# reset excludes and column count for each row
 	for row_index in range(row_size):
 		board.append([])
-		for column_count in range(row_size):
-			excludes = board[row_index]
-			print len(board[row_index])
+		for column_count in range(column_size):
+			excludes = []
+			excludes.append(board[row_index])
+			for row in range(row_index-1):
+				print "row: " + str(row) + " col: " + str(column_count) ,
+				print "num: " + str(board[row][column_count])
+				excludes.append(board[row][column_count])
 			new_number = new_generate_number(excludes,row_size)
 			board[row_index].append(new_number)
+		print board
 
 	return board
 
 def new_generate_number(excludes,row_size):
 	new_number = random.randint(1,row_size)
+	max_count = 0;
 	while new_number in(excludes):
+		print str(new_number) + " " + str(excludes)
 		new_number = random.randint(1,row_size)
+		max_count += 1
+		if max_count == 9:
+			break
 	return new_number
 			
 def new_print_board(board):
+	print "\n"
+	print "Sudoku Board!"
 	for row in board:
 		print row
+		print len(row)
 
 new_print_board(new_board(3))
