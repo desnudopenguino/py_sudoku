@@ -78,34 +78,29 @@ def print_block_row(row):
 		print "\n"
 
 #create the board
-def new_board():
+def new_board(segment_size):
+	row_size = segment_size ** 2
 	#board array
 	board = []
-	excludes = []
-	#make it 2d
-	for index in range(9):
+	# reset excludes and column count for each row
+	for row_index in range(row_size):
 		board.append([])
-
-	column_count = 0
-	for column_index in range(9):
-		excludes = []
-		row_count = 0
-		while row_count < 9:
-			new_number = new_generate_number(excludes)
-			board[column_index].append(new_number)
-			excludes.append(new_number)
-			row_count += 1
+		for column_count in range(row_size):
+			excludes = board[row_index]
+			print len(board[row_index])
+			new_number = new_generate_number(excludes,row_size)
+			board[row_index].append(new_number)
 
 	return board
 
-def new_generate_number(excludes):
-	new_number = random.randint(1,9)
+def new_generate_number(excludes,row_size):
+	new_number = random.randint(1,row_size)
 	while new_number in(excludes):
-		new_number = random.randint(1,9)
+		new_number = random.randint(1,row_size)
 	return new_number
 			
 def new_print_board(board):
 	for row in board:
 		print row
 
-new_print_board(new_board())
+new_print_board(new_board(3))
