@@ -20,7 +20,9 @@ def check_columns(board):
 	for row in range(len(board)):
 		for temp_row in range(len(board)):
 			if temp_row != row:
-				print str(temp_row) + " " + str(row)	
+				for col_index in range(9):
+					if board[row][col_index] == board[temp_row][col_index]:
+						print "num1: " + str(board[row][col_index]) + " num2: " + str(board[temp_row][col_index]) + " x1: " + str(row) + " y1: " + str(col_index) + " x2: " + str(temp_row)  + " y2: " + str(col_index)
 		
 
 def generate_number(row_size, used):
