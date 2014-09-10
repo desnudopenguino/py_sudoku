@@ -20,7 +20,7 @@ def generate_board(size):
 		if check_used_position(position, used_positions) == False:
 			#use other logic here to check if number is unique in row, col, & block
 			number = random.randint(1,full_size)
-			if check_row(number,x) and check_column(number,y) and check_block(number,x,y):
+			if check_row(number,x,board) and check_column(number,y,board) and check_block(number,x,y,board):
 				board[x][y] = number
 				used_positions.append([x,y])
 
@@ -39,13 +39,19 @@ def check_used_position(position, used_positions):
 	else:
 		return False
 
-def check_row(number, row_index):
+def check_row(number, row_index, board):
+	row = []
+	for count in range(len(board)):
+		row.append(board[row_index][count])
+	if number in row:
+		return False
+	else:
+		return True
+
+def check_column(number, column_index, board):
 	return True
 
-def check_column(number, column_index):
-	return True
-
-def check_block(number, row_index, column_index):
+def check_block(number, row_index, column_index, board):
 	return True
 
 
