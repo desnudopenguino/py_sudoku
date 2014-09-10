@@ -72,7 +72,18 @@ def check_column(number, column_index, board):
 		return True
 
 def check_block(number, row_index, column_index, board):
-	return True
+	block_x = row_index / 3
+	block_y = column_index / 3
+	block = []
+
+	for row in range(block_x*3,block_x*3+3):
+		for column in range(block_y*3,block_y*3+3):
+			block.append(board[row][column])
+	
+	if number in block:
+		return False
+	else:
+		return True
 
 # if the system becomes locked up, reset some numbers to 0 to see if it can correct itself.
 def reset_positions(x_pos,y_pos,board,used_positions):
