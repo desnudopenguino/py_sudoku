@@ -22,7 +22,7 @@ def check_columns(board):
 			if temp_row != row:
 				for col_index in range(9):
 					if board[row][col_index] == board[temp_row][col_index]:
-						print "num1: " + str(board[row][col_index]) + " num2: " + str(board[temp_row][col_index]) + " x1: " + str(row) + " y1: " + str(col_index) + " x2: " + str(temp_row)  + " y2: " + str(col_index)
+						board[temp_row].append(board[temp_row].pop(col_index))
 		
 
 def generate_number(row_size, used):
@@ -37,6 +37,27 @@ def print_board(board):
 	for row in board:
 		print row
 
-my_board = new_board(3)
-print_board(my_board)
-check_columns(my_board)
+def generate_segment(row_size,used):
+	segment = []
+	count = 0
+	while count < row_size ** .5:
+		new_number = random.randint(1,row_size)
+		while new_number in used:
+			new_number = random.randint(1,row_size)
+		segment.append(new_number)
+		count += 1
+	return segment 
+
+def generate_block(row_size):
+	block = []
+	used = []
+	for count in range(int(row_size ** .5)):
+		new_segment = generate_segment(row_size,block)
+		block.append(new_segment)
+		used += new_segment
+		print used
+		print block
+
+	return block
+
+print generate_block(9)
